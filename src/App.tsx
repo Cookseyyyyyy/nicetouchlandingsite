@@ -26,7 +26,8 @@ function App() {
       <main className="centered-content">
         <div className="content-wrapper">
           <h1 className="main-title">Nice Touch</h1>
-          <h2 className="tagline">Creative Tools For Creatives</h2>
+          <p className="tagline">Creative Tools For Creatives</p>
+          <p className="infoline">Be the first to be in the know...</p>
 
           <div className="signup-box">
             {!submitted ? (
