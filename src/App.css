@@ -1,0 +1,285 @@
+:root {
+  --primary-color: #5d3eff;
+  --primary-light: #8467ff;
+  --secondary-color: #01e8dc;
+  --dark-color: #070b25;
+  --darker-color: #050819;
+  --light-color: #f2f5ff;
+  --gray-color: #a1a8bc;
+  --white: #ffffff;
+  --box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--light-color);
+  background-color: var(--dark-color);
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.landing-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-color);
+  position: relative;
+}
+
+/* Background design elements */
+.landing-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(93, 62, 255, 0.15) 0%, rgba(7, 11, 37, 0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.landing-container::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: -10%;
+  width: 60%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(1, 232, 220, 0.1) 0%, rgba(7, 11, 37, 0) 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  background-color: rgba(7, 11, 37, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10;
+  position: relative;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  background: linear-gradient(to right, var(--primary-light), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
+  color: var(--light-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+nav a:hover {
+  color: var(--secondary-color);
+  opacity: 1;
+}
+
+/* Centered Main Content */
+.centered-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--darker-color) 0%, var(--dark-color) 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  max-width: 800px;
+  z-index: 2;
+}
+
+/* Add the keyframes animation for the gradient */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.main-title {
+  font-size: 7rem;
+  font-weight: 600; /* Or whatever weight you prefer */
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  
+  /* Update the gradient with more color stops and make it larger */
+  background: linear-gradient(
+    90deg, 
+    var(--primary-color), 
+    var(--secondary-color), 
+    #9c59ff, 
+    var(--primary-color)
+  );
+  background-size: 300% 100%; /* Make gradient wider than the element for animation */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Add the animation properties */
+  animation: gradientAnimation 8s ease infinite;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  color: var(--gray-color);
+  margin-bottom: 3.5rem;
+  font-weight: 500;
+  max-width: 600px;
+}
+
+/* Signup Box */
+.signup-box {
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.signup-form::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: rgba(7, 11, 37, 0.4);
+  border-radius: 16px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: -1;
+}
+
+.signup-form input {
+  flex: 1;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid rgba(93, 62, 255, 0.3);
+  background-color: rgba(7, 11, 37, 0.6);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  color: var(--white);
+  transition: all 0.3s ease;
+}
+
+.signup-form input::placeholder {
+  color: rgba(161, 168, 188, 0.6);
+}
+
+.signup-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(93, 62, 255, 0.2);
+}
+
+.signup-form button {
+  padding: 1.1rem 1.5rem;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.signup-form button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+.signup-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(93, 62, 255, 0.4);
+}
+
+.signup-form button:hover::before {
+  left: 100%;
+}
+
+.success-message {
+  text-align: center;
+  color: var(--secondary-color);
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  background: rgba(7, 11, 37, 0.4);
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(1, 232, 220, 0.3);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 4rem;
+  }
+  
+  .tagline {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: #f2f5ff;
+  }
+  
+  .signup-form {
+    flex-direction: column;
+  }
+  
+  .signup-form button {
+    margin-top: 0.5rem;
+  }
+}
