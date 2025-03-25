@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import BallPit from "./components/ballpit";
 
 function App() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  
+  // Add a useEffect to log when the App component mounts
+  useEffect(() => {
+    console.log("App component mounted");
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,6 +21,14 @@ function App() {
 
   return (
     <div className="landing-container">
+      {/* New 3D grid of spheres */}
+      <BallPit 
+        gridWidth={10}
+        gridHeight={10}
+        gridDepth={2}
+        sphereColor="#4a90e2"
+      />
+      
       <header className="header">
         <div className="brand">Nice Touch</div>
         <nav>
