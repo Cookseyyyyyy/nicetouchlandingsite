@@ -26,7 +26,7 @@ const BallPit: React.FC<BallPitProps> = ({
   const bloomPassRef = useRef<UnrealBloomPass | null>(null);
   const envMapRef = useRef<THREE.Texture | null>(null);
   const rafRef = useRef<number | null>(null);
-  const spheresRef = useRef<{mesh: THREE.Mesh, body: CANNON.Body, originalMaterial: THREE.Material}[]>([]);
+  const spheresRef = useRef<{mesh: THREE.Mesh, body: CANNON.Body, originalMaterial: THREE.Material, highlightStartTime?: number, isAnimating?: boolean}[]>([]);
   const worldRef = useRef<CANNON.World | null>(null);
   const containerRef = useRef<{mesh: THREE.Mesh, body: CANNON.Body} | null>(null);
   const raycasterRef = useRef<THREE.Raycaster>(new THREE.Raycaster());
@@ -36,6 +36,7 @@ const BallPit: React.FC<BallPitProps> = ({
   
   const timeStepRef = useRef<number>(1 / 60);
   const lastCallTimeRef = useRef<number>(0);
+  const highlightAnimationDuration = 1000; // 1 second in milliseconds
   
   // Bloom control states
   const [bloomStrength, setBloomStrength] = useState<number>(0.15);
@@ -330,6 +331,45 @@ const BallPit: React.FC<BallPitProps> = ({
     }
   };
   
+  // Update animation of highlighting spheres
+  const updateHighlightAnimations = () => {
+    const currentTime = performance.now();
+    
+    spheresRef.current.forEach((sphere, index) => {
+      if (sphere.isAnimating && sphere.highlightStartTime) {
+        const elapsedTime = currentTime - sphere.highlightStartTime;
+        const progress = Math.min(elapsedTime / highlightAnimationDuration, 1);
+        
+        if (progress < 1) {
+          // Get the current material
+          const material = sphere.mesh.material as THREE.MeshStandardMaterial | 
+                                                THREE.MeshPhysicalMaterial;
+          
+          // Calculate the interpolated emissive intensity
+          // Start from 50 (highlight) and reduce to original value
+          if (material.emissiveIntensity !== undefined) {
+            const originalIntensity = sphere.originalMaterial instanceof THREE.MeshStandardMaterial ? 
+                                    sphere.originalMaterial.emissiveIntensity || 0 : 0;
+            
+            const targetIntensity = 50; // Peak highlight intensity
+            material.emissiveIntensity = targetIntensity - (progress * (targetIntensity - originalIntensity));
+          }
+        } else {
+          // Animation complete, restore original material
+          sphere.mesh.material = sphere.originalMaterial;
+          sphere.isAnimating = false;
+          sphere.highlightStartTime = undefined;
+          
+          // If this is the hovered sphere that just finished animating,
+          // reset the hover state to avoid flicker
+          if (hoveredSphereRef.current === index) {
+            hoveredSphereRef.current = -1;
+          }
+        }
+      }
+    });
+  };
+  
   // Check for spheres under the mouse cursor and update hover state
   const checkSphereHover = () => {
     if (!cameraRef.current || !sceneRef.current) return;
@@ -346,9 +386,12 @@ const BallPit: React.FC<BallPitProps> = ({
         (intersects.length === 0 || 
          meshes[hoveredSphereRef.current].id !== intersects[0].object.id)) {
       
-      // Reset the material of the previously hovered sphere
+      // Start animation for the previously hovered sphere
       const sphere = spheresRef.current[hoveredSphereRef.current];
-      sphere.mesh.material = sphere.originalMaterial;
+      sphere.isAnimating = true;
+      sphere.highlightStartTime = performance.now();
+      
+      // No need to reset material immediately as it will animate
       hoveredSphereRef.current = -1;
     }
     
@@ -405,7 +448,7 @@ const BallPit: React.FC<BallPitProps> = ({
               roughness: 0.7,
               metalness: 0.3,
               emissive: 0x222222,
-              emissiveIntensity: 0.5,
+              emissiveIntensity: 50,
               envMap: envMapRef.current,
               envMapIntensity: 0.5
             });
@@ -418,7 +461,7 @@ const BallPit: React.FC<BallPitProps> = ({
               clearcoat: 0.8,
               reflectivity: 1.0,
               emissive: 0xaaaaaa,
-              emissiveIntensity: 0.3,
+              emissiveIntensity: 50,
               envMap: envMapRef.current,
               envMapIntensity: 1.5
             });
@@ -429,11 +472,14 @@ const BallPit: React.FC<BallPitProps> = ({
               roughness: 0.3,
               metalness: 0.5,
               emissive: 0xff69b4,
-              emissiveIntensity: 1.2, // Increased intensity for hover
+              emissiveIntensity: 50, // Increased intensity for hover
               envMap: envMapRef.current,
               envMapIntensity: 0.8
             });
           }
+          
+          // Cancel any running animation for this sphere
+          spheresRef.current[hoveredIndex].isAnimating = false;
           
           // Apply highlight material
           spheresRef.current[hoveredIndex].mesh.material = highlightMaterial;
@@ -739,6 +785,9 @@ const BallPit: React.FC<BallPitProps> = ({
         object.mesh.quaternion.copy(object.body.quaternion as any);
       });
     }
+    
+    // Update highlight animations
+    updateHighlightAnimations();
     
     // Render scene using composer
     if (sceneRef.current && cameraRef.current && composerRef.current) {
