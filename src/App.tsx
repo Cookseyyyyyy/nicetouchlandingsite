@@ -21,12 +21,11 @@ function App() {
 
   return (
     <div className="landing-container">
-      {/* New 3D grid of spheres */}
+      {/* 3D grid of spheres with multiple materials */}
       <BallPit 
         gridWidth={10}
         gridHeight={10}
         gridDepth={2}
-        sphereColor="#4a90e2"
       />
       
       <header className="header">
@@ -39,7 +38,7 @@ function App() {
 
       <main className="centered-content">
         <div className="content-wrapper">
-          <h1 className="main-title">Nice Touch</h1>
+          <h1 className="main-title">NICE TOUCH</h1>
           <p className="tagline">Creative Tools For Creatives</p>
           <p className="infoline">Be the first to be in the know...</p>
 
