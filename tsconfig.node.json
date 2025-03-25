@@ -23,7 +23,7 @@
     "esModuleInterop": true,
 
     "paths": {
-      "three/examples/*": ["node_modules/three/examples/*"]
+      "three/examples/*": ["./node_modules/three/examples/*"]
     }
   },
   "include": ["vite.config.ts"]
