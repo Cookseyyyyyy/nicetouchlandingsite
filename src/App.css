@@ -1,3 +1,6 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 :root {
   --primary-color: #5d3eff;
   --primary-light: #8467ff;
@@ -8,10 +11,10 @@
   --gray-color: #a1a8bc;
   --white: #ffffff;
   --box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  --highlight-pink: #ff3d8b;
 }
 
-/* Import Poppins font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 
 * {
   box-sizing: border-box;
@@ -28,7 +31,7 @@ html, body {
   overflow-x: hidden;
   font-family: 'Poppins', sans-serif;
   /* Background that will show through the transparent 3D scene */
-  background: linear-gradient(180deg, #0e0e0e 0%, #686177 100%);
+  background: #000000;
   color: var(--light-color);
 }
 
@@ -52,27 +55,34 @@ body {
   display: none;
 }
 
-/* Adjust text shadow for light background */
-.main-title, .tagline, .infoline {
-  text-shadow: none;
+/* Main content styles */
+.main-content {
+  flex: 1;
+  display: flex;
+  padding: 4rem 2rem;
 }
 
-/* Content wrapper styling for dark background */
-.content-wrapper {
-  background: rgba(18, 22, 56, 0);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding-left: 6rem;
-  padding-right: 6rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 2;
+.hero-content {
+  max-width: 600px;
+  padding-left: 2rem;
+}
+
+/* Main title styling */
+.main-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.infoline {
+  color: var(--white);
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  text-transform: capitalize;
 }
 
 /* Header */
@@ -111,35 +121,6 @@ nav a:hover {
   color: var(--secondary-color);
 }
 
-/* Main content area */
-.centered-content {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
-.main-title {
-  margin: 0 0 1rem;
-  font-size: 5rem;
-  font-weight: 600;
-  color: white;
-  text-shadow: none;
-}
-
-.tagline {
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
-}
-
-.infoline {
-  color: white;
-  margin-bottom: 1.5rem;
-}
-
 /* Sign-up form styling */
 .signup-box {
   margin-top: 1.5rem;
@@ -148,7 +129,6 @@ nav a:hover {
 .signup-form {
   display: flex;
   gap: 0.5rem;
-  justify-content: center;
 }
 
 .signup-form input {
@@ -160,6 +140,7 @@ nav a:hover {
   background: rgba(255, 255, 255, 0.8);
   color: #333;
   font-size: 0.9rem;
+  text-transform: capitalize;
 }
 
 .signup-form input::placeholder {
@@ -174,18 +155,20 @@ nav a:hover {
 
 .signup-form button {
   padding: 0.8rem 1.5rem;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #8467ff 100%);
+  background: var(--highlight-pink);
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  background: linear-gradient(45deg, var(--primary-color), var(--highlight-pink));
   transition: transform 0.2s, box-shadow 0.2s;
+  text-transform: uppercase;
 }
 
 .signup-form button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(93, 62, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 61, 139, 0.3);
 }
 
 .success-message {
@@ -206,8 +189,8 @@ nav a:hover {
     padding: 1rem;
   }
   
-  .content-wrapper {
-    padding: 1.5rem;
+  .hero-content {
+    padding-left: 0;
   }
   
   .main-title {
@@ -220,6 +203,10 @@ nav a:hover {
   
   .signup-form button {
     width: 100%;
+  }
+  
+  .main-content {
+    padding: 2rem 1rem;
   }
 }
 

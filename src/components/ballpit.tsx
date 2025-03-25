@@ -821,7 +821,7 @@ const BallPit: React.FC<BallPitProps> = ({
       <div ref={mountRef} style={{ width: '100%', height: '100%', position: 'absolute', zIndex: -1 }} />
       
       {/* Bloom Controls */}
-      <div className="bloom-controls" style={{
+      {/* <div className="bloom-controls" style={{
         position: 'fixed',
         bottom: showControls ? '20px' : '-250px',
         right: '20px',
@@ -894,7 +894,7 @@ const BallPit: React.FC<BallPitProps> = ({
             style={{ width: '100%' }}
           />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -36,11 +36,10 @@ function App() {
         </nav>
       </header>
 
-      <main className="centered-content">
-        <div className="content-wrapper">
-          <h1 className="main-title">NICE TOUCH</h1>
-          <p className="tagline">Creative Tools For Creatives</p>
-          <p className="infoline">Be the first to be in the know...</p>
+      <main className="main-content">
+        <div className="hero-content">
+          <h1 className="main-title">YOUR TOOLS<br />YOUR VISION<br />NICE TOUCH</h1>
+          <p className="infoline">See What A Nice Touch Can Do. Join The List.</p>
 
           <div className="signup-box">
             {!submitted ? (
@@ -49,10 +48,10 @@ function App() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
+                  placeholder="Enter Your Email Address"
                   required
                 />
-                <button type="submit">Sign Up</button>
+                <button type="submit">SIGN UP</button>
               </form>
             ) : (
               <div className="success-message">
