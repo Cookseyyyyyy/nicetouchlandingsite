@@ -3,7 +3,8 @@ export default {
   ignoredRouteFiles: ["**/.*"],
   serverModuleFormat: "esm",
   // Specify the server target
-  serverBuildTarget: "node-cjs", // or "netlify" if using @remix-run/netlify
+  serverBuildTarget: "static",
+  staticExport: true,
   // Tell Remix to use Vite
   future: {
     v2_routeConvention: true,
