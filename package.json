@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "remix vite:dev",
     "build": "remix vite:build",
-    "start": "remix-serve ./build/index.js",
+    "start": "remix-serve ./build/server/index.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@netlify/remix-adapter": "^2.6.0",
     "@remix-run/dev": "^2.16.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",

@@ -4,8 +4,7 @@ export default {
   serverModuleFormat: "esm",
   // Specify the server target
   serverBuildTarget: "netlify",
-  staticExport: true,
-  // Tell Remix to use Vite
+  // Remove staticExport: true as it conflicts with server-side rendering
   future: {
     v2_routeConvention: true,
     v2_meta: true,
