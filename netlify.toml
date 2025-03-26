@@ -3,6 +3,9 @@
   publish = "build/client"
   functions = "build/server"
 
+[build.environment]
+  NPM_FLAGS = "--legacy-peer-deps"
+
 [dev]
   command = "npm run dev"
   port = 3000
