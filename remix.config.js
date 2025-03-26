@@ -3,7 +3,7 @@ export default {
   ignoredRouteFiles: ["**/.*"],
   serverModuleFormat: "esm",
   // Specify the server target
-  serverBuildTarget: "static",
+  serverBuildTarget: "netlify",
   staticExport: true,
   // Tell Remix to use Vite
   future: {
